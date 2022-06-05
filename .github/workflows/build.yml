@@ -23,15 +23,17 @@ jobs:
 
       - name: Get dependencies and build
         run: |
-          sudo apt-get update
-          sudo apt-get -y install gcc-mingw-w64-x86-64
-          sudo apt-get -y install gcc-arm-linux-gnueabihf libc6-dev-armhf-cross
-          sudo apt-get -y install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
+#          sudo apt-get update
+#          sudo apt-get -y install gcc-mingw-w64-x86-64
+#          sudo apt-get -y install gcc-arm-linux-gnueabihf libc6-dev-armhf-cross
+#          sudo apt-get -y install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
           wget https://musl.cc/aarch64-linux-musl-cross.tgz
           tar -zxf aarch64-linux-musl-cross.tgz
-          sudo ln -s aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /usr/bin/aarch64-linux-musl-gcc 
-          chmod +x ./build.sh
-          ./build.sh -r b
+          pwd
+          sudo ln -s aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /usr/bin/aarch64-linux-musl-gcc
+          aarch64-linux-musl-gcc
+#          chmod +x ./build.sh
+#          ./build.sh -r b
 
       - name: Upload binary files (windows_amd64)
         uses: actions/upload-artifact@v2
