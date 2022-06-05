@@ -46,6 +46,7 @@ _build() {
   os="${arr[0]}"
   arch="${arr[1]}"
   gcc="${arr[2]}"
+  libc="${arr[3]-'glibc'}"
 
   # Go build to build the binary.
   export GOOS=$os
@@ -54,9 +55,9 @@ _build() {
   export CGO_ENABLED=1
 
   if [ -n "$VERSION" ]; then
-    out="release/cloudreve_${VERSION}_${os}_${arch}"
+    out="release/cloudreve_${VERSION}_${os}_${arch}_${libc}"
   else
-    out="release/cloudreve_${COMMIT_SHA}_${os}_${arch}"
+    out="release/cloudreve_${COMMIT_SHA}_${os}_${arch}_${libc}"
   fi
 
   go build -a -o "${out}" -ldflags " -X 'github.com/cloudreve/Cloudreve/v3/pkg/conf.BackendVersion=$VERSION' -X 'github.com/cloudreve/Cloudreve/v3/pkg/conf.LastCommit=$COMMIT_SHA'"
@@ -76,7 +77,7 @@ release() {
   cd $REPO
   ## List of architectures and OS to test coss compilation.
   ##SUPPORTED_OSARCH="linux/amd64/gcc linux/arm/arm-linux-gnueabihf-gcc windows/amd64/x86_64-w64-mingw32-gcc linux/arm64/aarch64-linux-gnu-gcc"
-  SUPPORTED_OSARCH="linux/arm64/aarch64-linux-musl-gcc"
+  SUPPORTED_OSARCH="linux/arm64/aarch64-linux-musl-gcc/musl"
   echo "Release builds for OS/Arch/CC: ${SUPPORTED_OSARCH}"
   for each_osarch in ${SUPPORTED_OSARCH}; do
     _build "${each_osarch}"
