@@ -29,7 +29,7 @@ jobs:
           sudo apt-get -y install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
           wget https://musl.cc/aarch64-linux-musl-cross.tgz
           tar -zxf aarch64-linux-musl-cross.tgz
-          ln -s aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /usr/bin/aarch64-linux-musl-gcc 
+          sudo ln -s aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /usr/bin/aarch64-linux-musl-gcc 
           chmod +x ./build.sh
           ./build.sh -r b
 
