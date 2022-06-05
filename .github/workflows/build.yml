@@ -25,8 +25,7 @@ jobs:
         run: |
           wget https://musl.cc/aarch64-linux-musl-cross.tgz
           tar -zxf aarch64-linux-musl-cross.tgz
-          pwd
-          sudo ln -s aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /usr/bin/aarch64-linux-musl-gcc
+          export PATH=$PATH:$(pwd)/aarch64-linux-musl-cross/bin/
           aarch64-linux-musl-gcc
 #          chmod +x ./build.sh
 #          ./build.sh -r b
